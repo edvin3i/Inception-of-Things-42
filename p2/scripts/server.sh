@@ -19,3 +19,9 @@ if (curl -sfL https://get.k3s.io | sh -) ; then
 else
     echo -e "K3s installiation is failed!"
 fi
+
+until kubectl get nodes 2>/dev/null | grep -q " Ready"; do
+    sleep 2
+done
+
+kubectl apply -f /vagrant/confs
