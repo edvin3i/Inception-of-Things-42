@@ -26,3 +26,9 @@ if cp /var/lib/rancher/k3s/server/token /vagrant/token.env ; then
 else
     echo -e "Export server\'s token is failed."
 fi
+
+echo "alias k='kubectl'" >> /etc/profile.d/aliases.sh
+
+until kubectl get nodes 2>/dev/null | grep -q " Ready"; do
+    sleep 2
+done

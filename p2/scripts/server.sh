@@ -20,6 +20,8 @@ else
     echo -e "K3s installiation is failed!"
 fi
 
+echo "alias k='kubectl'" >> /etc/profile.d/aliases.sh
+
 until kubectl get nodes 2>/dev/null | grep -q " Ready"; do
     sleep 2
 done
