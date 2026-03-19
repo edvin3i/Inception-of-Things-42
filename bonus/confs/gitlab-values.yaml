@@ -1,6 +1,6 @@
 global:
-    hosts:
-      domain: student.42.fr
+  hosts:
+    domain: student.42.fr
     edition: ce
     ingress:
       configureCertmanager: false

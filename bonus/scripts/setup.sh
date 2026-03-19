@@ -31,11 +31,21 @@ else
       -f confs/gitlab-values.yaml
 
 
-    kubectl wait --for=condition=available deployment/gitlab-webservice-default \
-      --namespace gitlab --timeout=600s
+    echo "Waiting for Gitlab webservice..."
+    until kubectl get deployment gitlab-webservice-default -n gitlab -o jsonpath='{.status.availableReplicas}' 2>/dev/null | grep -q '[0-9]'; do
+        echo -n "."
+        sleep 10
+    done
+    echo " Ready!"
+
 
     kubectl get secret --namespace gitlab gitlab-gitlab-initial-root-password \
       -ojsonpath='{.data.password}' | base64 --decode ; echo
+
+    kubectl port-forward svc/gitlab-webservice-default -n gitlab 8181:8181 &
+      sleep 2
+
+    GITLAB_URL="http://localhost:8181"
 
     # Get toolbox pod's name
     TOOLBOX_POD=$(kubectl get pods -n gitlab -l app=toolbox -o jsonpath='{.items[0].metadata.name}')
@@ -54,8 +64,6 @@ else
 
     echo "=== Gitlab Token: $GITLAB_TOKEN ==="
 
-
-    GITLAB_URL="http://gitlab-webservice-default.gitlab.svc:8181"
     PROJECT_NAME="iot-gbreana-demo-app"
 
     # Create the project in GitLab
@@ -94,7 +102,7 @@ else
     kubectl create secret generic gitlab-repo \
         --namespace argocd \
         --from-literal=type=git \
-        --from-literal=url="$GITLAB_URL/root/$PROJECT_NAME.git" \
+        --from-literal=url="http://gitlab-webservice-default.gitlab.svc:8181/root/$PROJECT_NAME.git" \
         --from-literal=username=root \
         --from-literal=password="$GITLAB_TOKEN" \
         --from-literal=insecure="true"

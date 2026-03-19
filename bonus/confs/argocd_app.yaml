@@ -9,7 +9,7 @@ spec:
   project: default
 
   source:
-    repoURL:  http://gitlab-webservice-default.gitlab.svc:8181/root/iot-gbreana-demo-app.git
+    repoURL: http://gitlab-webservice-default.gitlab.svc:8181/root/iot-gbreana-demo-app.git
     targetRevision: main
     path: manifests
 
