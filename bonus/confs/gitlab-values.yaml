@@ -1,16 +1,20 @@
 global:
   hosts:
     domain: student.42.fr
-    edition: ce
-    ingress:
-      configureCertmanager: false
-    kas:
-      enabled: false
-    pages:
-      enabled: false
+  edition: ce
+  ingress:
+    configureCertmanager: false
+  kas:
+    enabled: false
+  pages:
+    enabled: false
 
 certmanager-issuer:
   email: gbreana@student.42.fr
+
+certmanager:
+  startupapicheck:
+    enabled: false
 
 prometheus:
   install: false
