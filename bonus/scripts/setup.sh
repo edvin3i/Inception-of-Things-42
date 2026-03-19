@@ -26,6 +26,7 @@ else
     helm repo update
     helm upgrade --install gitlab gitlab/gitlab \
       --namespace gitlab --create-namespace \
+      --set certmanager.install=false \
       --timeout 600s \
       -f confs/gitlab-values.yaml
 
