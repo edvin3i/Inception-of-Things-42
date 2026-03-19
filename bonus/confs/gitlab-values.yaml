@@ -10,6 +10,8 @@ certmanager-issuer:
 
 certmanager:
   installCRDs: false
+  startupapicheck:
+    enabled: false
 
 prometheus:
   install: false
