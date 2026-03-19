@@ -37,7 +37,7 @@ else
     done
     echo " Ready!"
 
-
+    echo -e "\n=== Initial Gitlab root password ===:"
     kubectl get secret --namespace gitlab gitlab-gitlab-initial-root-password \
       -ojsonpath='{.data.password}' | base64 --decode ; echo
 
@@ -62,6 +62,15 @@ else
         ")
 
     echo "=== Gitlab Token: $GITLAB_TOKEN ==="
+
+    kubectl exec -n gitlab "$TOOLBOX_POD" -- gitlab-rails runner "
+      user = User.find_by_username('root');
+      user.password = 'P@ssw0rd42!';
+      user.password_confirmation = 'P@ssw0rd42!';
+      user.save!;
+      puts 'Password changed!'
+    "
+    echo -e "=== Login: root / P@ssw0rd42! ===\n"
 
     PROJECT_NAME="iot-gbreana-demo-app"
 
