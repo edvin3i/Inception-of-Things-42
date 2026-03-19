@@ -2,12 +2,15 @@ global:
   hosts:
     domain: student.42.fr
   edition: ce
+  ingress:
+    configureCertmanager: false
 
 certmanager-issuer:
   email: gbreana@student.42.fr
 
 certmanager:
-  install: false
+  installCRDs: false
+
 prometheus:
   install: false
 gitlab-runner:

@@ -10,7 +10,7 @@ if ! k3d --version &>/dev/null ; then
     echo "k3d is not installed!"
     exit 1
 else
-    k3d cluster create 'serious-cluster' -p "8888:8888@loadbalancer" -p "8080:8080@loadbalancer" -p "443:443@loadbalancer"
+    k3d cluster create 'serious-cluster' -p "8888:8888@loadbalancer" -p "443:443@loadbalancer"
 fi
 
 if ! kubectl version --client &>/dev/null ; then
