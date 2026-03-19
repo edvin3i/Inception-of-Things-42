@@ -18,9 +18,15 @@ certmanager:
 
 prometheus:
   install: false
+
 gitlab-runner:
   install: false
+
 gitlab:
+  webservice:
+    replicaCount: 1
+  sidekiq:
+    replicaCount: 1
   mailroom:
     enabled: false
   spamcheck:
