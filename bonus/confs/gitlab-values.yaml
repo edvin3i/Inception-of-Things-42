@@ -24,7 +24,8 @@ gitlab-runner:
 
 gitlab:
   webservice:
-    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 1
   sidekiq:
     minReplicas: 1
     maxReplicas: 1
