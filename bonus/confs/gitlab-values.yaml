@@ -1,0 +1,23 @@
+global:
+  hosts:
+    domain: student.42.fr
+  edition: ce
+
+certmanager-issuer:
+  email: gbreana@student.42.fr
+
+certmanager:
+  install: false
+prometheus:
+  install: false
+gitlab-runner:
+  install: false
+gitlab:
+  mailroom:
+    enabled: false
+  pages:
+    enabled: false
+  kas:
+    enabled: false
+  spamcheck:
+    enabled: false
