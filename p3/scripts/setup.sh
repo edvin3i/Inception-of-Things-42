@@ -10,7 +10,7 @@ if ! k3d --version &>/dev/null ; then
     echo "k3d is not installed!"
     exit 1
 else
-    k3d cluster create 'dusty-cluster'
+    k3d cluster create 'dusty-cluster' -p "8888:8888@loadbalancer"
 fi
 
 if ! kubectl version --client &>/dev/null ; then
