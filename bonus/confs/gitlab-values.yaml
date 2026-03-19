@@ -26,7 +26,8 @@ gitlab:
   webservice:
     replicaCount: 1
   sidekiq:
-    replicaCount: 1
+    minReplicas: 1
+    maxReplicas: 1
   mailroom:
     enabled: false
   spamcheck:
